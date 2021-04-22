@@ -34,5 +34,9 @@ namespace BLL.DTO
             RentStoreName = rent.RentStore.Name;
             ManagerName = rent.Manager.Name;
         }
+
+        public RentDTO()
+        {
+        }
     }
 }

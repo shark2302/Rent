@@ -14,6 +14,7 @@ namespace BLL.DTO
         public RentStoreDTO()
         {
         }
+        
         public RentStoreDTO(RentStore rentStore, List<ProductPriceDTO> products) 
         {
             Name = rentStore.Name;

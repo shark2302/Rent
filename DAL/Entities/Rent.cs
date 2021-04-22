@@ -10,8 +10,8 @@ namespace DAL.Entities
         public int Id { get; set; }
         public int ClientId{get;set;}
         public int ProductId{ get; set; }
-        public int RentStoreId{ get; set; }
-        public int ManagerId { get; set; }
+        public int? RentStoreId{ get; set; }
+        public int? ManagerId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public virtual Client Client { get; set; }

@@ -25,8 +25,7 @@ namespace BLL.Services
             var client = clientQuery.MoveNext() ? clientQuery.Current : null;
             var productQuery = _database.Products.Get(p => p.Name == rent.Product.ProductName).GetEnumerator();
             var product = productQuery.MoveNext() ? productQuery.Current : null;
-            var rentStoreQuery = _database.RentStores.Get(p => p.Name == rent.RentStoreName).GetEnumerator();
-            var rentStore = rentStoreQuery.MoveNext() ? rentStoreQuery.Current : null;
+            var rentStore = _database.RentStores.FindById(rent.RentStoreId);
             var managerQuery = _database.Managers.Get(p => p.Name == rent.ManagerName).GetEnumerator();
             var manager = managerQuery.MoveNext() ? managerQuery.Current : null;
             _database.Rents.Create(new Rent
@@ -38,6 +37,11 @@ namespace BLL.Services
                 StartTime = DateTime.Now
             });
             _database.Save();
+        }
+
+        public List<RentDTO> GetAllActiveRentsForStore(int rentStoreId)
+        {
+            throw new NotImplementedException();
         }
 
         public RentDTO GetRentById(int id)

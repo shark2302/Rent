@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "CreateRent";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Создание аренды</title>
+</head>
+<body>
+    @{
+        var store = ViewBag.Store;
+        var products = ViewBag.Products;
+        var clients = ViewBag.Clients;
+        var managers = ViewBag.Managers;
+    }
+    <form method="post">
+        <table>
+            <tr>
+                <td>Продукт:</td>
+                <td>
+                    <select name="productName" required>
+                        @foreach (var product in products)
+                        {
+                            <option value="@product.ProductName">@product.ProductName</option>
+                        }
+                    </select>
+                </td>
+                <td>Клиент</td>
+                <td>
+                    <select name="clientName" required>
+                        @foreach (var client in clients)
+                        {
+                            <option value="@client.Name">@client.Name</option>
+                        }
+                    </select>
+                </td>
+                <td>Менеджер</td>
+                <td>
+                    <select name="managerName" required>
+                        @foreach (var manager in managers)
+                        {
+                            <option value="@manager.Name">@manager.Name</option>
+                        }
+                    </select>
+                </td>
+                <input type="hidden" name="rentStoreId" value="@store.Id" />
+            </tr>
+            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
+        </table>
+    </form>
+    </body>
+</html>

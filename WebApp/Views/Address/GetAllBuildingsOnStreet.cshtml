@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BLL.DTO.BuildingDTO>
+@{
+    ViewData["Title"] = "View";
+}
+
+<html>
+<head>
+    <title>Улицы города</title>
+</head>
+<body>
+    @{
+        var streetData = ViewBag.Message;
+    }
+    <form method="post">
+        <table>
+            <tr>
+                <td>Номер:</td>
+                <td><input type="number" name="Number" /> </td>
+                <input type="hidden" name="StreetId" value="@streetData.Id" />
+            </tr>
+            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
+        </table>
+    </form>
+    <h3>Все здания улицы @streetData.Name</h3>
+    <table>
+        <tr>
+            <td>Номер</td>
+            <td></td>
+        </tr>
+        @foreach (var building in Model)
+        {
+            <tr>
+                <td>@building.Number</td>
+                <td><a href="~/Address/DeleteBuilding?id=@building.Id&streetId=@building.StreetId">Удалить</a></td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

@@ -15,7 +15,7 @@ namespace BLL.DTO
         public ProductPriceDTO Product { get; set; }
         public string RentStoreName { get; set; }
         public string ManagerName { get; set; }
-
+        public int RentStoreId { get; set; }
 
         public float Check { get
             {
@@ -33,6 +33,7 @@ namespace BLL.DTO
             Product = new ProductPriceDTO(productPrice);
             RentStoreName = rent.RentStore.Name;
             ManagerName = rent.Manager.Name;
+            RentStoreId = (int)rent.RentStoreId;
         }
 
         public RentDTO()

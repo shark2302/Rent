@@ -7,6 +7,7 @@ namespace BLL.DTO
 {
     public class RentStoreDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public BuildingDTO Building { get; set; }
         public List<ProductPriceDTO> Products { get; set; }
@@ -17,6 +18,7 @@ namespace BLL.DTO
         
         public RentStoreDTO(RentStore rentStore, List<ProductPriceDTO> products) 
         {
+            Id = rentStore.Id;
             Name = rentStore.Name;
             Building = new BuildingDTO(rentStore.Building);
             Products = products;

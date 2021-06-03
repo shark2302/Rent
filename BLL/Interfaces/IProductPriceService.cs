@@ -10,5 +10,7 @@ namespace BLL.Interfaces
         void CreateProductPrice(ProductPriceDTO pruductPriceDTO);
         ProductPriceDTO GetByProductAndStore(string productName, string rentStoreName);
         IEnumerable<ProductPriceDTO> GetAllForStore(string storeName);
+        ProductPriceDTO GetByProductAndStore(string productName, int rentStoreId);
+        IEnumerable<ProductPriceDTO> GetAllForStore(int storeId);
     }
 }

@@ -26,10 +26,24 @@ namespace BLL.Services
             var building = _database.Buildings.Select().Include(s => s.Street).Include(s => s.Street.City)
                 .Where(s => s.Street.Name == rentStoreDTO.Building.StreetName && s.Street.City.Name == rentStoreDTO.Building.CityName
                 && s.Number == rentStoreDTO.Building.Number)
-                .ToList()[0];
-            _database.RentStores.Create(new RentStore { Name = rentStoreDTO.Name, BuildingId = building.Id });
-            _database.Save();
+                .ToList();
+            if (building.Count > 0)
+            {
+                _database.RentStores.Create(new RentStore { Name = rentStoreDTO.Name, BuildingId = building[0].Id });
+                _database.Save();
+            }
+            else throw new NullReferenceException();
         }
+
+        public RentStoreDTO GetRentStoreById(int id)
+        {
+            var result = _database.RentStores.Select().Include(s => s.Building).Include(s => s.Building.Street)
+                .Include(s => s.Building.Street.City).Where(s => s.Id == id).ToList();
+
+
+            return result.Count > 0 ? new RentStoreDTO(result[0], MapPrice(result[0])) : null;
+        }
+
 
         public RentStoreDTO GetRentStoreByNameAndAdress(string name, BuildingDTO buildingDTO)
         {
@@ -53,6 +67,13 @@ namespace BLL.Services
             return result;
         }
 
+        public void DeleteRentStore(int id)
+        {
+            _database.RentStores.Remove(_database.RentStores.FindById(id));
+            _database.Save();
+        }
+
+
         private List<ProductPriceDTO> MapPrice(RentStore rentStore)
         {
             List<ProductPriceDTO> prices = new List<ProductPriceDTO>();
@@ -62,5 +83,7 @@ namespace BLL.Services
             }
             return prices;
         }
+
+       
     }
 }

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BLL.DTO.ManagerDTO>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Все менеджеры</title>
+</head>
+<body>
+    @{ 
+        var store = ViewBag.Store;
+    }
+    
+    <form method="post">
+        <table>
+            <tr>
+                <td>Имя:</td>
+                <td><input type="text" name="name" required /> </td>
+                <input type="hidden" name="RentStoreId" value="@store.Id" />
+            </tr>
+            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
+        </table>
+    </form>
+
+    <h3>Все менеджеры магазина @store.Name</h3>
+    <table>
+        <tr>
+            <td>Имя</td>
+        </tr>
+        @foreach (var manager in Model)
+        {
+            <tr>
+                <td>@manager.Name</td>
+                <td><a href="~/RentStore/DeleteManager?id=@manager.Id&rentStoreId=@store.Id">Удалить</a></td>
+
+            </tr>
+        }
+    </table>
+</body>
+</html>

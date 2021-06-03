@@ -27,6 +27,12 @@ namespace BLL.Services
             _database.Save();
         }
 
+        public CityDTO GetCityById(int cityId)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<City, CityDTO>()).CreateMapper();
+            return mapper.Map<City, CityDTO>(_database.Cities.FindById(cityId));
+        }
+
         public IEnumerable<CityDTO> GetCities()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<City, CityDTO>()).CreateMapper();
@@ -48,28 +54,34 @@ namespace BLL.Services
             _database.Save();
         }
 
+        public StreetDTO GetStreetById(int streetId)
+        {
+            var result = _database.Streets.Select().Include(p => p.City).Where(p => p.Id == streetId).ToList();
+            return result.Count > 0 ? new StreetDTO(result[0]) : null;
+        }
+
         public StreetDTO GetStreetByNameInCity(string cityName, string name)
         {
 
             var result = _database.Streets.Select().Include(p => p.City).Where(p => p.Name == name && p.City.Name == cityName).ToList();
             return result.Count > 0 ? new StreetDTO(result[0]) : null;
-            /*var res = _database.Streets.Get(c => c.Name == name && c.City.Name == cityName).GetEnumerator();
-            return res.MoveNext() ? new StreetDTO(res.Current) : null;*/
         }
 
-        public IEnumerable<StreetDTO> GetStreets()
+        public IEnumerable<StreetDTO> GetStreets(int cityId)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Street, StreetDTO>()
                                                 .ForMember("CityName", opt => opt.MapFrom(c => c.City.Name))).CreateMapper();
-            return mapper.Map<List<Street>, List<StreetDTO>>(_database.Streets.Select().Include(p => p.City).ToList());
+            var l = _database.Streets.Select().Include(p => p.City).Where(p => p.CityId == cityId).ToList();
+            return mapper.Map<List<Street>, List<StreetDTO>>(l);
         }
 
         public void CreateBuilding(BuildingDTO building)
         {
-            var result = _database.Streets.Select().Include(s => s.City)
+            /*var result = _database.Streets.Select().Include(s => s.City)
                 .Where(s => s.Name == building.StreetName && s.City.Name == building.CityName)
                 .ToList();
-            var street = result[0];
+            var street = result[0];*/
+            var street = _database.Streets.FindById(building.StreetId);
             _database.Buildings.Create(new Building { Number = building.Number, StreetId = street.Id });
             _database.Save();
         }
@@ -90,6 +102,37 @@ namespace BLL.Services
                 result.Add(new BuildingDTO(building));
             }
             return result;
+        }
+
+        public IEnumerable<BuildingDTO> GetBuildingsOnStreet(int streetId)
+        {
+            List<BuildingDTO> result = new List<BuildingDTO>();
+            foreach (var building in _database.Buildings.Select().Include(s => s.Street).Include(s => s.Street.City).Where(p => p.StreetId == streetId).ToList())
+            {
+                result.Add(new BuildingDTO(building));
+            }
+            return result;
+        }
+
+        public void DeleteCity(int id)
+        {
+            var city = _database.Cities.FindById(id);
+            _database.Cities.Remove(city);
+            _database.Save();
+        }
+
+        public void DeleteStreet(int id)
+        {
+            var street = _database.Streets.FindById(id);
+            _database.Streets.Remove(street);
+            _database.Save();
+        }
+
+        public void DeleteBuilding(int id)
+        {
+            var building = _database.Buildings.FindById(id);
+            _database.Buildings.Remove(building);
+            _database.Save();
         }
     }
 }

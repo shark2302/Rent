@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BLL.DTO.RentStoreDTO>
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <title>Все магазины</title>
+    </head>
+    <body>
+        <form method="post">
+            <table>
+                <tr>
+                    <td>Название:</td>
+                    <td><input type="text" name="name" required /> </td>
+                    <td>Город:</td>
+                    <td><input type="text" name="city" required /> </td>
+                    <td>Улица:</td>
+                    <td><input type="text" name="street" required /> </td>
+                    <td>Номер дома:</td>
+                    <td><input type="number" name="number" required /> </td>
+                </tr>
+                <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
+            </table>
+        </form>
+        @{
+            var errorMessage = ViewBag.Message;
+            if (errorMessage != null)
+            {
+                <p>@errorMessage</p>
+            }
+        }
+
+        <h3>Все магазины</h3>
+        <table>
+            <tr>
+                <td>Название</td>
+                <td>Адресс</td>
+            </tr>
+            @foreach (var store in Model)
+            {
+                <tr>
+                    <td>@store.Name</td>
+                    <td>@store.Building.CityName, @store.Building.StreetName, @store.Building.Number</td>
+                    <td><a href="~/RentStore/ControlRentStore?id=@store.Id">Открыть управление</a></td>
+                    <td><a href="~/RentStore/DeleteRentStore?id=@store.Id">Удалить</a></td>
+
+                </tr>
+            }
+        </table>
+    </body>
+</html>

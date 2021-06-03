@@ -25,6 +25,11 @@ namespace BLL.Services
             _database.Save();
         }
 
+        public ProductDTO GetById(int id)
+        {
+            return new ProductDTO(_database.Products.FindById(id));
+        }
+
         public ProductDTO FindByName(string name)
         {
             var result = _database.Products.Get(s => s.Name == name).GetEnumerator();
@@ -35,6 +40,12 @@ namespace BLL.Services
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()).CreateMapper();
             return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(_database.Products.Get());
+        }
+
+        public void DeleteProduct(int id)
+        {
+            _database.Products.Remove(_database.Products.FindById(id));
+            _database.Save();
         }
     }
 }

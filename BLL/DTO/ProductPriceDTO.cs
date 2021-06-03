@@ -8,9 +8,11 @@ namespace BLL.DTO
 {
     public class ProductPriceDTO
     {
+        public int Id { get; set; }
         public int Price { get; set; }
         public string ProductName { get; set; }
         public string RentStoreName { get; set; }
+        public int RentStoreId { get; set; }
 
         public ProductPriceDTO()
         {

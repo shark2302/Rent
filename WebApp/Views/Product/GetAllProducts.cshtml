@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BLL.DTO.ProductDTO>
+@{
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Все продукты</title>
+</head>
+<body>
+    <form method="post">
+        <table>
+            <tr>
+                <td>Название:</td>
+                <td><input type="text" name="Name" /> </td>
+            </tr>
+            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
+        </table>
+    </form>
+    <h3>Все продукты</h3>
+    <table>
+        <tr>
+            <td>Название</td>
+            <td></td>
+        </tr>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td><a href="~/Product/DeleteProduct?id=@product.Id">Удалить</a></td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

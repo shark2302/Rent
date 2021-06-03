@@ -10,5 +10,7 @@ namespace BLL.Interfaces
         void CreateClient(ClientDTO client);
         ClientDTO GetClient(int? id);
         IEnumerable<ClientDTO> GetClients();
+        void UpdateClient(int id, ClientDTO clientDTO);
+        void DeleteClient(int id);
     }
 }

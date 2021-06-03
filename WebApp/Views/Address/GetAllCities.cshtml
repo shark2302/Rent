@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BLL.DTO.CityDTO>
+    @{
+//ViewData["Title"] = "Список городов";
+
+    }
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <title>Все города</title>
+    </head>
+    <body>
+        <form method="post">
+            <table>
+                <tr>
+                    <td>Название:</td>
+                    <td><input type="text" name="Name" /> </td>
+                </tr>
+                <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
+            </table>
+        </form>
+        <h3>Все города</h3>
+        <table>
+            <tr>
+                <td>Название</td>
+                <td></td>
+            </tr>
+            @foreach (var city in Model)
+            {
+        <tr>
+            <td>@city.Name</td>
+            <td><a href="~/Address/GetAllStreetsInCity?cityId=@city.Id">Посмотреть все улицы</a></td>
+            <td><a href="~/Address/DeleteCity?id=@city.Id">Удалить</a></td>
+        </tr>
+            }
+        </table>
+    </body>
+</html>

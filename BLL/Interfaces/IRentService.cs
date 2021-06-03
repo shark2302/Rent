@@ -10,5 +10,6 @@ namespace BLL.Interfaces
         void CreateRent(RentDTO rent);
         void StopRent(int id);
         RentDTO GetRentById(int id);
+        List<RentDTO> GetAllActiveRentsForStore(int rentStoreId);
     }
 }

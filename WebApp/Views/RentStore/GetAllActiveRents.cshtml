@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BLL.DTO.RentDTO>
+    @{
+        Layout = "_Layout";
+
+    }
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <title>Все активыне аренды</title>
+    </head>
+    <body>
+        @{
+            var store = ViewBag.Store;
+            var manager = ViewBag.Manager;
+            var client = ViewBag.Client;
+            if (store != null)
+            {
+                <h3>Все активные аренды магазина @store.Name</h3>
+            }
+            else if (manager != null)
+            {
+                <h3>Все активные аренды менеджера @manager.Name</h3>
+            }
+            else if (client != null)
+            {
+                <h3>Все активные аренды клиента @client.Name</h3>
+            }
+        }
+
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td>Id</td>
+                <td>Продукт</td>
+                <td>Клиент</td>
+                <td>Менеджер</td>
+                <td>Время начала аренды</td>
+            </tr>
+            @foreach (var rent in Model)
+            {
+                <tr>
+                    <td>@rent.Id</td>
+                    <td>@rent.Product.ProductName</td>
+                    <td>@rent.ClientName</td>
+                    <td>@rent.ManagerName</td>
+                    <td>@rent.StartTime</td>
+                    <td><a href="~/RentStore/StopRent?rentId=@rent.Id&rentStoreId=@rent.RentStoreId">Завершить аренду</a></td>
+                </tr>
+            }
+        </table>
+    </body>
+</html>

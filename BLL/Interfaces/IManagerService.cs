@@ -8,6 +8,7 @@ namespace BLL.Interfaces
     public interface IManagerService
     {
         void CreateManager(ManagerDTO managerDTO);
+        ManagerDTO GetManagerById(int id);
         List<ManagerDTO> GetAllRentStoreManagers(int rentStoreId);
         ManagerDTO FindByNameAndRentStore(string name, string rentStoreName);
         void DeleteManager(int id);

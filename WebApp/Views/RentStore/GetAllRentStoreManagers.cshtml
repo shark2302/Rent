@@ -1,28 +1,46 @@
 ﻿@model IEnumerable<BLL.DTO.ManagerDTO>
+@{
+    Layout = "_Layout";
+}
 <!DOCTYPE html>
 
 <html>
 <head>
     <title>Все менеджеры</title>
+
 </head>
 <body>
-    @{ 
+    @{
         var store = ViewBag.Store;
     }
-    
-    <form method="post">
-        <table>
-            <tr>
-                <td>Имя:</td>
-                <td><input type="text" name="name" required /> </td>
-                <input type="hidden" name="RentStoreId" value="@store.Id" />
-            </tr>
-            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
-        </table>
-    </form>
+
+    <div class="modal fade" id="managerCreateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Добавить менеджера</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="manager-name" class="col-form-label">Имя:</label>
+                            <input type="text" class="form-control" name="Name" id="manager-name">
+                        </div>
+                        <input type="hidden" name="RentStoreId" value="@store.Id" /><br>
+                        <input type="submit" value="Создать" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <h3>Все менеджеры магазина @store.Name</h3>
-    <table>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#managerCreateModel">+</button>
+    <table class="table table-bordered table-hover">
         <tr>
             <td>Имя</td>
         </tr>
@@ -30,7 +48,9 @@
         {
             <tr>
                 <td>@manager.Name</td>
-                <td><a href="~/RentStore/DeleteManager?id=@manager.Id&rentStoreId=@store.Id">Удалить</a></td>
+                <td><a href="~/RentStore/GetAllActiveRentsForManager?managerId=@manager.Id">Активные аренды</a></td>
+                <td><a href="~/RentStore/GetAllEndedRentsForManager?managerId=@manager.Id">Завершенные аренды</a></td>
+                <td><a href="~/RentStore/DeleteManager?id=@manager.Id&rentStoreId=@store.Id" class="link-danger">Удалить</a></td>
 
             </tr>
         }

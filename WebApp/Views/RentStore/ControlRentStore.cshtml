@@ -1,10 +1,16 @@
 ﻿@model BLL.DTO.RentStoreDTO
 @{
     ViewData["Title"] = "ControlRentStore";
+    Layout = "_Layout";
 }
+
+
 
 <h1>Управление магазином @Model.Name</h1>
 <h2>Адресс: @Model.Building.CityName, @Model.Building.StreetName, @Model.Building.Number</h2>
 <p><a href="~/RentStore/GetAllRentStoreProducts?id=@Model.Id">Продукты</a></p>
 <p><a href="~/RentStore/GetAllRentStoreManagers?rentStoreId=@Model.Id">Менеджеры</a></p>
 <p><a href="~/RentStore/CreateRent?rentStoreId=@Model.Id">Оформить аренду</a></p>
+<p><a href="~/RentStore/GetAllActiveRents?rentStoreId=@Model.Id">Все активные аренды</a></p>
+<p><a href="~/RentStore/GetAllEndedRents?rentStoreId=@Model.Id">Все завершенные аренды</a></p>
+       

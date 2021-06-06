@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<BLL.DTO.CityDTO>
     @{
-//ViewData["Title"] = "Список городов";
-
+        Layout = "_Layout";
     }
     <!DOCTYPE html>
 
@@ -10,29 +9,44 @@
         <title>Все города</title>
     </head>
     <body>
-        <form method="post">
-            <table>
-                <tr>
-                    <td>Название:</td>
-                    <td><input type="text" name="Name" /> </td>
-                </tr>
-                <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
-            </table>
-        </form>
-        <h3>Все города</h3>
-        <table>
+        <h3>Все города</h3><br />
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cityCreateModel">+</button>
+        <table class="table table-bordered table-hover">
             <tr>
                 <td>Название</td>
                 <td></td>
             </tr>
             @foreach (var city in Model)
             {
-        <tr>
-            <td>@city.Name</td>
-            <td><a href="~/Address/GetAllStreetsInCity?cityId=@city.Id">Посмотреть все улицы</a></td>
-            <td><a href="~/Address/DeleteCity?id=@city.Id">Удалить</a></td>
-        </tr>
+                <tr>
+                    <td>@city.Name</td>
+                    <td><a href="~/Address/GetAllStreetsInCity?cityId=@city.Id">Посмотреть все улицы</a></td>
+                    <td><a href="~/Address/DeleteCity?id=@city.Id" class="link-danger">Удалить</a></td>
+                </tr>
             }
         </table>
+
+        <div class="modal fade" id="cityCreateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Добавить город</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="city-name" class="col-form-label">Название:</label>
+                                <input type="text" class="form-control" name="Name" id="city-name">
+                            </div><br />
+                            <input type="submit" value="Создать" class="btn btn-primary" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

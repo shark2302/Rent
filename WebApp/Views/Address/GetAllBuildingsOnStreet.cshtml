@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BLL.DTO.BuildingDTO>
 @{
     ViewData["Title"] = "View";
+    Layout = "_Layout";
 }
 
 <html>
@@ -11,18 +12,10 @@
     @{
         var streetData = ViewBag.Message;
     }
-    <form method="post">
-        <table>
-            <tr>
-                <td>Номер:</td>
-                <td><input type="number" name="Number" /> </td>
-                <input type="hidden" name="StreetId" value="@streetData.Id" />
-            </tr>
-            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
-        </table>
-    </form>
-    <h3>Все здания улицы @streetData.Name</h3>
-    <table>
+   
+    <h3>Все здания улицы @streetData.Name</h3><br />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buildingCreateModel">+</button>
+    <table class="table table-bordered table-hover">
         <tr>
             <td>Номер</td>
             <td></td>
@@ -31,9 +24,33 @@
         {
             <tr>
                 <td>@building.Number</td>
-                <td><a href="~/Address/DeleteBuilding?id=@building.Id&streetId=@building.StreetId">Удалить</a></td>
+                <td><a href="~/Address/DeleteBuilding?id=@building.Id&streetId=@building.StreetId" class="link-danger">Удалить</a></td>
             </tr>
         }
     </table>
+
+    <div class="modal fade" id="buildingCreateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Добавить здание</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="building-number" class="col-form-label">Номер:</label>
+                            <input type="number" class="form-control" name="Number" id="building-number" required>
+                        </div><br />
+                        <input type="hidden" name="StreetId" value="@streetData.Id" />
+                        <input type="submit" value="Создать" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

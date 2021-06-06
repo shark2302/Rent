@@ -109,7 +109,42 @@ public class RentStore : Controller
     {
         var product = _productPriceService.GetByProductAndStore(productName, rentStoreId);
         _rentService.CreateRent(new RentDTO { ClientName = clientName, ManagerName = managerName,
-            RentStoreId = rentStoreId, Product = product, StartTime = DateTime.Now });
+            RentStoreId = rentStoreId, Product = product});
+        TempData["RentCreated"] = true;
         return RedirectToAction("ControlRentStore", new { id = rentStoreId });
+    }
+
+    public IActionResult GetAllActiveRents(int rentStoreId)
+    {
+        var store = _rentStoreService.GetRentStoreById(rentStoreId);
+        ViewBag.Store = store;
+        return View(_rentService.GetAllActiveRentsForStore(rentStoreId));
+    }
+
+    public IActionResult StopRent(int rentId, int rentStoreId)
+    {
+        _rentService.StopRent(rentId);
+        return RedirectToAction("GetAllActiveRents", new { rentStoreId });
+    }
+
+    public IActionResult GetAllEndedRents(int rentStoreId)
+    {
+        var store = _rentStoreService.GetRentStoreById(rentStoreId);
+        ViewBag.Store = store;
+        return View(_rentService.GetAllEndedRentsForStore(rentStoreId));
+    }
+
+    public IActionResult GetAllActiveRentsForManager(int managerId)
+    {
+        var manager = _managerService.GetManagerById(managerId);
+        ViewBag.Manager = manager;
+        return View("GetAllActiveRents", _rentService.GetAllActiveRentsForManager(managerId));
+    }
+
+    public IActionResult GetAllEndedRentsForManager(int managerId)
+    {
+        var manager = _managerService.GetManagerById(managerId);
+        ViewBag.Manager = manager;
+        return View("GetAllEndedRents", _rentService.GetAllEndedRentsForManager(managerId));
     }
 }

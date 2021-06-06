@@ -50,5 +50,10 @@ namespace BLL.Services
             _database.Managers.Remove(_database.Managers.FindById(id));
             _database.Save();
         }
+
+        public ManagerDTO GetManagerById(int id)
+        {
+            return new ManagerDTO(_database.Managers.FindById(id));
+        }
     }
 }

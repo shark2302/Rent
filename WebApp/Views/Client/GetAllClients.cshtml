@@ -1,54 +1,93 @@
 ﻿@model IEnumerable<BLL.DTO.ClientDTO>
 @{
-//ViewData["Title"] = "Список городов";
-
+    Layout = "_Layout";
 }
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>Все города</title>
+    <title>Все клиенты</title>
 </head>
 <body>
-    <form method="post">
-        <table>
-            <tr>
-                <td>Имя:</td>
-                <td><input type="text" name="name" required/> </td>
-                <td>Город:</td>
-                <td><input type="text" name="city" required/> </td>
-                <td>Улица:</td>
-                <td><input type="text" name="street" required/> </td>
-                <td>Номер дома:</td>
-                <td><input type="number" name="number" required/> </td>
-            </tr>
-            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
-        </table>
-    </form>
-    @{ 
+    @{
+        var clientToUpdate = ViewBag.Client;
+        if (clientToUpdate != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    $("#clientCreateModel").modal('show');
+                });
+            </script>
+        }
         var errorMessage = ViewBag.Message;
         if (errorMessage != null)
         {
-            <p>@errorMessage</p>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Ошибка!</strong> @errorMessage
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         }
-     }
-    
-    <h3>Все клиенты</h3>
-    <table>
+    }
+
+    <h3>Все клиенты</h3><br />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#clientCreateModel">+</button>
+    <table class="table table-bordered table-hover">
         <tr>
             <td>Имя</td>
             <td>Адресс</td>
         </tr>
         @foreach (var client in Model)
         {
-    <tr>
-        <td>@client.Name</td>
-        <td>@client.Building.CityName, @client.Building.StreetName, @client.Building.Number</td>
-        <td><a href="~/Client/UpdateClient?id=@client.Id">Изменить</a></td>
-        <td><a href="~/Client/DeleteClient?id=@client.Id">Удалить</a></td>
-        
-    </tr>
+            <tr>
+                <td>@client.Name</td>
+                <td>@client.Building.CityName, @client.Building.StreetName, @client.Building.Number</td>
+                <td><a href="~/Client/GetAllActiveRentsForClient?clientId=@client.Id">Все активные аренды</a></td>
+                <td><a href="~/Client/GetAllEndedRentsForClient?clientId=@client.Id">Все завершенные аренды</a></td>
+                <td><a href="~/Client/UpdateClient?id=@client.Id">Изменить</a></td>
+                <td><a href="~/Client/DeleteClient?id=@client.Id" class="link-danger">Удалить</a></td>
+
+            </tr>
         }
     </table>
+
+    <div class="modal fade" id="clientCreateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">@(clientToUpdate == null ? "Добавить клиента" : "Изменить клиента")</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="client-name" class="col-form-label">Имя:</label>
+                            <input type="text" class="form-control" name="name" id="client-name" value="@(clientToUpdate == null ? "" : clientToUpdate.Name)" required>
+                        </div><br />
+                        <div class="form-group">
+                            <label for="city-name" class="col-form-label">Город:</label>
+                            <input type="text" class="form-control" name="city" id="city-name" value="@(clientToUpdate == null ? "" : clientToUpdate.Building.CityName)" required>
+                        </div><br />
+                        <div class="form-group">
+                            <label for="street-name" class="col-form-label">Улица:</label>
+                            <input type="text" class="form-control" name="street" id="street-name" value="@(clientToUpdate == null ? "" : clientToUpdate.Building.StreetName)" required>
+                        </div><br />
+                        <div class="form-group">
+                            <label for="building" class="col-form-label">Номер дома:</label>
+                            <input type="number" class="form-control" name="number" id="building" value="@(clientToUpdate == null ? "" : clientToUpdate.Building.Number)" required>
+                        </div><br />
+                        <input type="submit" value="@(clientToUpdate == null ? "Создать" : "Изменить")" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </body>
 </html>

@@ -7,10 +7,12 @@ using System.Runtime.InteropServices;
 public class Client : Controller
 {
     private IClientService _clientService;
+    private IRentService _rentService;
 
-    public Client(IClientService clientService)
+    public Client(IClientService clientService, IRentService rentService)
     {
         _clientService = clientService;
+        _rentService = rentService;
     }
 
     public IActionResult GetAllClients()
@@ -32,7 +34,8 @@ public class Client : Controller
 
     public IActionResult UpdateClient(int id)
     {
-        return View(_clientService.GetClient(id));
+        ViewBag.Client = _clientService.GetClient(id);
+        return View("GetAllClients", _clientService.GetClients());
     }
 
     [HttpPost]
@@ -54,5 +57,19 @@ public class Client : Controller
     {
         _clientService.DeleteClient(id);
         return Redirect("GetAllClients");
+    }
+
+    public IActionResult GetAllActiveRentsForClient(int clientId)
+    {
+        var client = _clientService.GetClient(clientId);
+        ViewBag.Client = client;
+        return View("Views/RentStore/GetAllActiveRents.cshtml", _rentService.GetAllActiveRentsForClient(clientId));
+    }
+
+    public IActionResult GetAllEndedRentsForClient(int clientId)
+    {
+        var client = _clientService.GetClient(clientId);
+        ViewBag.Client = client;
+        return View("Views/RentStore/GetAllEndedRents.cshtml", _rentService.GetAllEndedRentsForClient(clientId));
     }
 }

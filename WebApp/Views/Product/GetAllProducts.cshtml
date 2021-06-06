@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<BLL.DTO.ProductDTO>
 @{
-
+    Layout = "_Layout";
 }
 <!DOCTYPE html>
 
@@ -9,17 +9,9 @@
     <title>Все продукты</title>
 </head>
 <body>
-    <form method="post">
-        <table>
-            <tr>
-                <td>Название:</td>
-                <td><input type="text" name="Name" /> </td>
-            </tr>
-            <tr><td><input type="submit" value="Создать" /> </td><td></td></tr>
-        </table>
-    </form>
     <h3>Все продукты</h3>
-    <table>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productCreateModel">+</button>
+    <table class="table table-striped">
         <tr>
             <td>Название</td>
             <td></td>
@@ -28,9 +20,33 @@
         {
             <tr>
                 <td>@product.Name</td>
-                <td><a href="~/Product/DeleteProduct?id=@product.Id">Удалить</a></td>
+                <td><a href="~/Product/DeleteProduct?id=@product.Id" class="link-danger">Удалить</a></td>
             </tr>
         }
     </table>
+
+    <div class="modal fade" id="productCreateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Добавить продукт</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="product-name" class="col-form-label">Название:</label>
+                            <input type="text" class="form-control" name="Name" id="product-name">
+                        </div><br />
+                        <input type="submit" value="Создать" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>

@@ -39,9 +39,90 @@ namespace BLL.Services
             _database.Save();
         }
 
+        public List<RentDTO> GetAllActiveRentsForClient(int clientId)
+        {
+            List<RentDTO> res = new List<RentDTO>();
+            var rents = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)
+                .Where(p => p.ManagerId == clientId && p.EndTime == DateTime.MinValue);
+            foreach (var rent in rents.ToList())
+            {
+                var price = _database.Prices.Select().Include(p => p.Product).Include(p => p.RentStore)
+                                            .Where(p => p.ProductId == rent.ProductId).ToList()[0];
+                res.Add(new RentDTO(rent, price));
+            }
+            return res;
+        }
+
+
+        public List<RentDTO> GetAllActiveRentsForManager(int managerId)
+        {
+            List<RentDTO> res = new List<RentDTO>();
+            var rents = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)
+                .Where(p => p.ManagerId == managerId && p.EndTime == DateTime.MinValue);
+            foreach (var rent in rents.ToList())
+            {
+                var price = _database.Prices.Select().Include(p => p.Product).Include(p => p.RentStore)
+                                            .Where(p => p.ProductId == rent.ProductId).ToList()[0];
+                res.Add(new RentDTO(rent, price));
+            }
+            return res;
+        }
+
         public List<RentDTO> GetAllActiveRentsForStore(int rentStoreId)
         {
-            throw new NotImplementedException();
+            List<RentDTO> res = new List<RentDTO>();
+            var rents = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)
+                .Where(p => p.RentStoreId == rentStoreId && p.EndTime == DateTime.MinValue);
+            foreach(var rent in rents.ToList())
+            {
+                var price = _database.Prices.Select().Include(p => p.Product).Include(p => p.RentStore)
+                                            .Where(p => p.ProductId == rent.ProductId).ToList()[0];
+                res.Add(new RentDTO(rent, price));
+            }
+            return res;
+        }
+
+        public List<RentDTO> GetAllEndedRentsForClient(int clientId)
+        {
+            List<RentDTO> res = new List<RentDTO>();
+            var rents = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)
+                .Where(p => p.ManagerId == clientId && p.EndTime != DateTime.MinValue);
+            foreach (var rent in rents.ToList())
+            {
+                var price = _database.Prices.Select().Include(p => p.Product).Include(p => p.RentStore)
+                                            .Where(p => p.ProductId == rent.ProductId).ToList()[0];
+                res.Add(new RentDTO(rent, price));
+            }
+            return res;
+        }
+
+        public List<RentDTO> GetAllEndedRentsForManager(int managerId)
+        {
+            List<RentDTO> res = new List<RentDTO>();
+            var rents = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)
+                .Where(p => p.ManagerId == managerId && p.EndTime != DateTime.MinValue);
+            foreach (var rent in rents.ToList())
+            {
+                var price = _database.Prices.Select().Include(p => p.Product).Include(p => p.RentStore)
+                                            .Where(p => p.ProductId == rent.ProductId).ToList()[0];
+                res.Add(new RentDTO(rent, price));
+            }
+            return res;
+        }
+
+        public List<RentDTO> GetAllEndedRentsForStore(int rentStoreId)
+        {
+
+            List<RentDTO> res = new List<RentDTO>();
+            var rents = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)
+                .Where(p => p.RentStoreId == rentStoreId && p.EndTime != DateTime.MinValue);
+            foreach (var rent in rents.ToList())
+            {
+                var price = _database.Prices.Select().Include(p => p.Product).Include(p => p.RentStore)
+                                            .Where(p => p.ProductId == rent.ProductId).ToList()[0];
+                res.Add(new RentDTO(rent, price));
+            }
+            return res;
         }
 
         public RentDTO GetRentById(int id)

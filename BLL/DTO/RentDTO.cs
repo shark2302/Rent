@@ -17,10 +17,10 @@ namespace BLL.DTO
         public string ManagerName { get; set; }
         public int RentStoreId { get; set; }
 
-        public float Check { get
+        public double Check { get
             {
                 if (EndTime != null)
-                    return (EndTime.Hour - StartTime.Hour) * Product.Price;
+                    return Math.Round((EndTime - StartTime).TotalHours * Product.Price, 2);
                 return -1;
             } }
 

@@ -1,0 +1,118 @@
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+An unhandled exception has occurred while executing the request.
+Hello
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Hello
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Hello
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+An unhandled exception has occurred while executing the request.
+Hello
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All cities was got
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All cities was got
+New city was added Novgorod
+All streets for city get (id=11)
+New street was added NovgorodStreet
+All streets for city get (id=11)
+All clients was get
+Новый клиент создан Andrew
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All cities was got
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Error updating user
+The view 'UpdateClient' was not found. Searched locations: /Views/Client/UpdateClient.cshtml, /Views/Shared/UpdateClient.cshtml, /Pages/Shared/UpdateClient.cshtml
+An unhandled exception has occurred while executing the request.
+Error updating user
+The view 'UpdateClient' was not found. Searched locations: /Views/Client/UpdateClient.cshtml, /Views/Shared/UpdateClient.cshtml, /Pages/Shared/UpdateClient.cshtml
+An unhandled exception has occurred while executing the request.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All cities was got
+All clients was get
+Error updating user
+The view 'UpdateClient' was not found. Searched locations: /Views/Client/UpdateClient.cshtml, /Views/Shared/UpdateClient.cshtml, /Pages/Shared/UpdateClient.cshtml
+An unhandled exception has occurred while executing the request.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Error updating user
+The view 'UpdateClient' was not found. Searched locations: /Views/Client/UpdateClient.cshtml, /Views/Shared/UpdateClient.cshtml, /Pages/Shared/UpdateClient.cshtml
+An unhandled exception has occurred while executing the request.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Error updating user
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Error updating user
+An unhandled exception has occurred while executing the request.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Error updating user
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Error updating user
+Клиент Andrew обновлен
+All clients was get
+All rent stores was get
+Error creating rent store
+Rent store NovgorodProkat was created
+All RentStore's managers was get
+New rent was created
+Getting filtered rents
+Downloading file
+Getting filtered rents
+All products get

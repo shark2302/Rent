@@ -1,19 +1,23 @@
 using BLL.DTO;
 using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 
 public class Address : Controller
 {
     private IAddressService _addressService;
+    private ILogger<Address> _logger;
 
-    public Address(IAddressService addressService)
+    public Address(IAddressService addressService, ILogger<Address> logger)
     {
+        _logger = logger;
         this._addressService = addressService;
     }
 
     public IActionResult GetAllCities()
     {
+        _logger.LogInformation("All cities was got");
         return View(_addressService.GetCities());
     }
 
@@ -21,12 +25,14 @@ public class Address : Controller
     public IActionResult GetAllCities(CityDTO city)
     {
         _addressService.CreateCity(city);
+        _logger.LogInformation("New city was added " + city.Name);
         return View(_addressService.GetCities());
     }
 
     public IActionResult DeleteCity(int id)
     {
         _addressService.DeleteCity(id);
+        _logger.LogInformation("City was deleted (id=" + id + ")");
         return RedirectToAction("GetAllCities");
     }
 
@@ -34,6 +40,7 @@ public class Address : Controller
     public IActionResult GetAllStreetsInCity(int cityId)
     {
         ViewBag.Message = _addressService.GetCityById(cityId);
+        _logger.LogInformation("All streets for city get (id=" + cityId + ")");
         return View(_addressService.GetStreets(cityId));
     }
 
@@ -41,6 +48,7 @@ public class Address : Controller
     public IActionResult GetAllStreetsInCity(StreetDTO street)
     {
         _addressService.CreateStreet(street);
+        _logger.LogInformation("New street was added " + street.Name);
         return GetAllStreetsInCity(street.CityId);
     }
 

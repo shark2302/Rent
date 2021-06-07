@@ -2,6 +2,7 @@ using BLL.DTO;
 using BLL.Interfaces;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,11 +17,13 @@ public class RentStore : Controller
     private IClientService _clientService;
     private IRentService _rentService;
 
-    private List<RentDTO> _cachedRents;
+    private ILogger<RentStore> _logger;
 
     public RentStore(IRentStoreService rentStoreService, IProductPriceService productPriceService, 
-        IProductService productService, IManagerService managerService, IClientService clientService, IRentService rentService)
+        IProductService productService, IManagerService managerService, IClientService clientService, IRentService rentService,
+        ILogger<RentStore> logger)
     {
+        _logger = logger;
         _rentStoreService = rentStoreService;
         _productPriceService = productPriceService;
         _productService = productService;
@@ -31,6 +34,7 @@ public class RentStore : Controller
 
     public IActionResult GetAllRentStores()
     {
+        _logger.LogInformation("All rent stores was get");
         return View(_rentStoreService.GetRentStores());
     }
     [HttpPost]
@@ -39,10 +43,12 @@ public class RentStore : Controller
         try
         {
             _rentStoreService.CreateRentStore(new RentStoreDTO { Name = name, Building = new BuildingDTO { Number = number, CityName = city, StreetName = street } });
+            _logger.LogInformation("Rent store " + name + " was created");
         }
         catch (NullReferenceException e)
         {
             ViewBag.Message = "Ошибка в создании адреса";
+            _logger.LogError("Error creating rent store");
         }
         return View(_rentStoreService.GetRentStores());
     }
@@ -63,6 +69,7 @@ public class RentStore : Controller
         var store = _rentStoreService.GetRentStoreById(id);
         ViewBag.Store = store;
         ViewBag.Products = _productService.GetProducts();
+        _logger.LogInformation("All " + store.Name + "\'s products was get");
         return View(store.Products);
     }
 
@@ -72,6 +79,7 @@ public class RentStore : Controller
         try
         {
             _productPriceService.CreateProductPrice(product);
+            _logger.LogInformation("Product " + product.ProductName + " was created");
         }
         catch (NullReferenceException e)
         {
@@ -84,6 +92,7 @@ public class RentStore : Controller
     {
         var store = _rentStoreService.GetRentStoreById(rentStoreId);
         ViewBag.Store = store;
+        _logger.LogInformation("All " + store.Name + "\'s managers was get");
         return View(_managerService.GetAllRentStoreManagers(rentStoreId));
     }
 
@@ -91,6 +100,7 @@ public class RentStore : Controller
     public IActionResult GetAllRentStoreManagers(ManagerDTO manager)
     {
         _managerService.CreateManager(manager);
+        _logger.LogInformation("Manager " + manager.Name + " was created");
         return GetAllRentStoreManagers(manager.RentStoreId);
     }
 
@@ -115,7 +125,7 @@ public class RentStore : Controller
         var product = _productPriceService.GetByProductAndStore(productName, rentStoreId);
         _rentService.CreateRent(new RentDTO { ClientName = clientName, ManagerName = managerName,
             RentStoreId = rentStoreId, Product = product});
-        TempData["RentCreated"] = true;
+        _logger.LogInformation("New rent was created");
         return RedirectToAction("ControlRentStore", new { id = rentStoreId });
     }
 
@@ -143,8 +153,8 @@ public class RentStore : Controller
         var rents = _rentService.GetAllEndedRentsForStore(rentStoreId);
         if (clientId != 0 || managerId != 0 || !String.IsNullOrEmpty(productName) || from != DateTime.MinValue || to != DateTime.MinValue)
         {
+            _logger.LogInformation("Getting filtered rents");
             rents = _rentService.GetFilteredRents(rentStoreId, clientId, managerId, productName, from, to);
-            _cachedRents = rents;
             string queryResultString = String.Empty;
             if (clientId != 0)
                 queryResultString += "Клиент: " + _clientService.GetClient(clientId).Name + "\n";
@@ -188,6 +198,7 @@ public class RentStore : Controller
 
             }
             workbook.SaveAs(memStream);
+            _logger.LogInformation("Downloading file");
             return File(memStream.ToArray(), "application/force-download", "Rents.xlsx");
         }
         
@@ -217,6 +228,7 @@ public class RentStore : Controller
         var store = _rentStoreService.GetRentStoreById(rentStoreId);
         ViewBag.Store = store;
         var res = _rentService.GetFilteredRents(rentStoreId, clientId, managerId, productName, from, to);
+        _logger.LogInformation("Getting filtered rents");
         string queryResultString = String.Empty;
         if (clientId != 0)
             queryResultString += "Клиент: " + _clientService.GetClient(clientId).Name + "\n";

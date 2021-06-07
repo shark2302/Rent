@@ -1,6 +1,7 @@
 using BLL.DTO;
 using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Runtime.InteropServices;
 
@@ -8,15 +9,18 @@ public class Client : Controller
 {
     private IClientService _clientService;
     private IRentService _rentService;
+    private ILogger<Client> _logger;
 
-    public Client(IClientService clientService, IRentService rentService)
+    public Client(IClientService clientService, IRentService rentService, ILogger<Client> logger)
     {
+        _logger = logger; 
         _clientService = clientService;
         _rentService = rentService;
     }
 
     public IActionResult GetAllClients()
     {
+        _logger.LogInformation("All clients was get");
         return View(_clientService.GetClients());
     }
     [HttpPost]
@@ -25,9 +29,11 @@ public class Client : Controller
         try
         {
             _clientService.CreateClient(new ClientDTO { Name = name, Building = new BuildingDTO { Number = number, CityName = city, StreetName = street } });
+            _logger.LogInformation("Новый клиент создан " + name);
         }catch (NullReferenceException e)
         {
             ViewBag.Message = "Ошибка в создании адреса";
+            _logger.LogError("Error creating user");
         }
             return View(_clientService.GetClients());
     }
@@ -35,6 +41,7 @@ public class Client : Controller
     public IActionResult UpdateClient(int id)
     {
         ViewBag.Client = _clientService.GetClient(id);
+        
         return View("GetAllClients", _clientService.GetClients());
     }
 
@@ -44,11 +51,13 @@ public class Client : Controller
         try
         {
             _clientService.UpdateClient(id, new ClientDTO { Name = name, Building = new BuildingDTO { Number = number, CityName = city, StreetName = street } });
+            _logger.LogInformation("Клиент " + name + " обновлен");
         }
         catch (NullReferenceException e)
         {
             ViewBag.Message = "Ошибка в создании адреса";
-            return View(_clientService.GetClient(id));
+            _logger.LogError("Error updating user");
+            return View("GetAllClients", _clientService.GetClients());
         }
         return Redirect("GetAllClients");
     }

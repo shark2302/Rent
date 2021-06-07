@@ -116,3 +116,171 @@ Getting filtered rents
 Downloading file
 Getting filtered rents
 All products get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All products get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+New product Book was created
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All cities was got
+All streets for city get (id=1)
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All rent stores was get
+All RentStore's managers was get
+All cities was got
+All clients was get
+All rent stores was get
+All rent stores was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All rent stores was get
+All rent stores was get
+Getting filtered rents
+Getting filtered rents
+Getting filtered rents
+Getting filtered rents
+Downloading file
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All cities was got
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All rent stores was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All cities was got
+All clients was get
+All rent stores was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All rent stores was get
+All RentStore's managers was get
+All RentStore's products was get
+All RentStore's products was get
+All rent stores was get
+All rent stores was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All rent stores was get
+Getting filtered rents
+Getting filtered rents
+Downloading file
+Getting filtered rents
+Downloading file
+All clients was get
+Клиент Andre обновлен
+All clients was get
+All clients was get
+All clients was get
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\e.kravchenko\source\repos\Rent\WebApp
+All clients was get
+All rent stores was get
+All cities was got
+City was deleted (id=11)
+All cities was got
+All clients was get
+All rent stores was get
+All cities was got
+All rent stores was get
+New rent was created
+New rent was created
+New rent was created

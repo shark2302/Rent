@@ -2,6 +2,8 @@ using BLL.DTO;
 using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 public class Product : Controller
@@ -17,8 +19,9 @@ public class Product : Controller
 
     public IActionResult GetAllProducts()
     {
-        _logger.LogInformation("All products get");
-        return View(_productService.GetProducts());
+        List<ProductDTO> products = _productService.GetProducts();
+        var sorted = products.OrderBy(p => p.Name).ToList();
+        return View(sorted);
     }
 
     [HttpPost]
@@ -26,7 +29,7 @@ public class Product : Controller
     {
         _productService.CreateProduct(product);
         _logger.LogInformation("New product " + product.Name + " was created");
-        return View(_productService.GetProducts());
+        return View(_productService.GetProducts().OrderBy(p => p.Name));
     }
 
     public IActionResult DeleteProduct(int id)

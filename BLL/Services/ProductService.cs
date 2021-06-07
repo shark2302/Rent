@@ -36,7 +36,7 @@ namespace BLL.Services
             return result.MoveNext() ? new ProductDTO(result.Current) : null;
         }
 
-        public IEnumerable<ProductDTO> GetProducts()
+        public List<ProductDTO> GetProducts()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()).CreateMapper();
             return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(_database.Products.Get());

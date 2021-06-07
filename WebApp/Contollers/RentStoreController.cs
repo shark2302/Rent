@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 public class RentStore : Controller
@@ -35,7 +36,7 @@ public class RentStore : Controller
     public IActionResult GetAllRentStores()
     {
         _logger.LogInformation("All rent stores was get");
-        return View(_rentStoreService.GetRentStores());
+        return View(_rentStoreService.GetRentStores().OrderBy(p => p.Name));
     }
     [HttpPost]
     public IActionResult GetAllRentStores(string name, string city, string street, int number)
@@ -50,7 +51,7 @@ public class RentStore : Controller
             ViewBag.Message = "Ошибка в создании адреса";
             _logger.LogError("Error creating rent store");
         }
-        return View(_rentStoreService.GetRentStores());
+        return View(_rentStoreService.GetRentStores().OrderBy(p => p.Name));
     }
 
     public IActionResult ControlRentStore(int id)
@@ -68,9 +69,9 @@ public class RentStore : Controller
     {
         var store = _rentStoreService.GetRentStoreById(id);
         ViewBag.Store = store;
-        ViewBag.Products = _productService.GetProducts();
+        ViewBag.Products = _productService.GetProducts().OrderBy(p => p.Name);
         _logger.LogInformation("All " + store.Name + "\'s products was get");
-        return View(store.Products);
+        return View(store.Products.OrderBy(p => p.ProductName));
     }
 
     [HttpPost]
@@ -93,7 +94,7 @@ public class RentStore : Controller
         var store = _rentStoreService.GetRentStoreById(rentStoreId);
         ViewBag.Store = store;
         _logger.LogInformation("All " + store.Name + "\'s managers was get");
-        return View(_managerService.GetAllRentStoreManagers(rentStoreId));
+        return View(_managerService.GetAllRentStoreManagers(rentStoreId).OrderBy(p => p.Name));
     }
 
     [HttpPost]

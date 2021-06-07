@@ -9,7 +9,7 @@ namespace BLL.Interfaces
     {
         void CreateProduct(ProductDTO productDTO);
         ProductDTO FindByName(string name);
-        IEnumerable<ProductDTO> GetProducts();
+        List<ProductDTO> GetProducts();
         void DeleteProduct(int id);
     }
 }

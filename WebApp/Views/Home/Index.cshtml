@@ -9,10 +9,47 @@
     <title>Приложение аренды товаров</title>
 </head>
 <body>
-    <h1>Приложение для аренды товаров</h1>
-    <p><a href="~/Address/GetAllCities">Адресса</a></p>
-    <p><a href="~/Client/GetAllClients">Клиенты</a></p>
-    <p><a href="~/Product/GetAllProducts">Продукты</a></p>
-    <p><a href="~/RentStore/GetAllRentStores">Магазины</a></p>
+	<h1>Приложение для аренды товаров</h1><br />
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Адреса</h5>
+					<p class="card-text">Добавляйте новые города, улицы, дома</p>
+					<a href="~/Address/GetAllCities" class="btn btn-primary">Перейти</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Клиенты</h5>
+					<p class="card-text">Создать, удалить, отредактировать клиента, посмотреть аренды</p>
+					<a href="~/Client/GetAllClients" class="btn btn-primary">Перейти</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Продукты</h5>
+					<p class="card-text">Добавляйте продукты в БД</p>
+					<a href="~/Product/GetAllProducts" class="btn btn-primary">Перейти</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Магазины</h5>
+					<p class="card-text">Управление всеми существующими магазинами аренды</p>
+					<a href="~/RentStore/GetAllRentStores" class="btn btn-primary">Перейти</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

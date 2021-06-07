@@ -3,6 +3,7 @@ using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 public class Client : Controller
@@ -21,7 +22,7 @@ public class Client : Controller
     public IActionResult GetAllClients()
     {
         _logger.LogInformation("All clients was get");
-        return View(_clientService.GetClients());
+        return View(_clientService.GetClients().OrderBy(p => p.Name));
     }
     [HttpPost]
     public IActionResult GetAllClients(string name, string city, string street, int number)
@@ -35,14 +36,14 @@ public class Client : Controller
             ViewBag.Message = "Ошибка в создании адреса";
             _logger.LogError("Error creating user");
         }
-            return View(_clientService.GetClients());
+            return View(_clientService.GetClients().OrderBy(p => p.Name));
     }
 
     public IActionResult UpdateClient(int id)
     {
         ViewBag.Client = _clientService.GetClient(id);
         
-        return View("GetAllClients", _clientService.GetClients());
+        return View("GetAllClients", _clientService.GetClients().OrderBy(p => p.Name));
     }
 
     [HttpPost]
@@ -57,7 +58,7 @@ public class Client : Controller
         {
             ViewBag.Message = "Ошибка в создании адреса";
             _logger.LogError("Error updating user");
-            return View("GetAllClients", _clientService.GetClients());
+            return View("GetAllClients", _clientService.GetClients().OrderBy(p => p.Name));
         }
         return Redirect("GetAllClients");
     }

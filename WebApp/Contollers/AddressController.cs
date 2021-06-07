@@ -3,6 +3,7 @@ using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 
 public class Address : Controller
 {
@@ -18,7 +19,7 @@ public class Address : Controller
     public IActionResult GetAllCities()
     {
         _logger.LogInformation("All cities was got");
-        return View(_addressService.GetCities());
+        return View(_addressService.GetCities().OrderBy(p => p.Name));
     }
 
     [HttpPost]
@@ -26,7 +27,7 @@ public class Address : Controller
     {
         _addressService.CreateCity(city);
         _logger.LogInformation("New city was added " + city.Name);
-        return View(_addressService.GetCities());
+        return View(_addressService.GetCities().OrderBy(p => p.Name));
     }
 
     public IActionResult DeleteCity(int id)
@@ -41,7 +42,7 @@ public class Address : Controller
     {
         ViewBag.Message = _addressService.GetCityById(cityId);
         _logger.LogInformation("All streets for city get (id=" + cityId + ")");
-        return View(_addressService.GetStreets(cityId));
+        return View(_addressService.GetStreets(cityId).OrderBy(p => p.Name));
     }
 
     [HttpPost]
@@ -61,7 +62,7 @@ public class Address : Controller
     public IActionResult GetAllBuildingsOnStreet(int streetId)
     {
         ViewBag.Message = _addressService.GetStreetById(streetId);
-        return View(_addressService.GetBuildingsOnStreet(streetId));
+        return View(_addressService.GetBuildingsOnStreet(streetId).OrderBy(p => p.Number));
     }
 
     [HttpPost]

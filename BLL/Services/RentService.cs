@@ -125,6 +125,33 @@ namespace BLL.Services
             return res;
         }
 
+        public List<RentDTO> GetFilteredRents(int rentStoreId, int clientId, int managerId, string productName, DateTime from, DateTime to)
+        {
+            List<RentDTO> res = new List<RentDTO>();
+            var rents = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)
+                .Where(p => p.RentStoreId == rentStoreId && p.EndTime != DateTime.MinValue);
+            
+            if(clientId != 0)
+            {
+                rents = rents.Where(p => p.ClientId == clientId);
+            }
+            if (managerId != 0)
+                rents = rents.Where(p => p.ManagerId == managerId);
+            if (!String.IsNullOrEmpty(productName))
+                rents = rents.Where(p => p.Product.Name == productName);
+            if (from != DateTime.MinValue)
+                rents = rents.Where(p => p.EndTime > from);
+            if (to != DateTime.MinValue)
+                rents = rents.Where(p => p.EndTime < to);
+            foreach (var rent in rents.ToList())
+            {
+                var price = _database.Prices.Select().Include(p => p.Product).Include(p => p.RentStore)
+                                            .Where(p => p.ProductId == rent.ProductId).ToList()[0];
+                res.Add(new RentDTO(rent, price));
+            }
+            return res;
+        }
+
         public RentDTO GetRentById(int id)
         {
             var rent = _database.Rents.Select().Include(p => p.Client).Include(p => p.Manager).Include(p => p.RentStore).Include(p => p.Product)

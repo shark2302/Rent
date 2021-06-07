@@ -46,7 +46,7 @@
                         <form method="post">
                             <div class="form-group">
                                 <label for="product-name" class="col-form-label">Продукт:</label>
-                                <select name="ProductName" id="product-name" required>
+                                <select name="ProductName" id="product-name" class="selectpicker" data-live-search="true" required>
                                     @foreach (var product in products)
                                     {
                                         <option value="@product.Name">@product.Name</option>

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.0.1" />
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Twitter.Bootstrap.MVC" Version="2.1.6" />
   </ItemGroup>

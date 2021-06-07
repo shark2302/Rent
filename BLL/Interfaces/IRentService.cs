@@ -16,5 +16,6 @@ namespace BLL.Interfaces
         List<RentDTO> GetAllEndedRentsForManager(int managerId);
         List<RentDTO> GetAllActiveRentsForClient(int clientId);
         List<RentDTO> GetAllEndedRentsForClient(int clientId);
+        List<RentDTO> GetFilteredRents(int rentStoreId, int clientId, int managerId, string productName, DateTime from, DateTime to);
     }
 }

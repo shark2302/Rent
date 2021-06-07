@@ -30,7 +30,7 @@
                     <form method="post">
                         <div class="form-group">
                             <label for="product" class="col-form-label">Продукт:</label>
-                            <select name="productName" id="product" required>
+                            <select name="productName" id="product" class="selectpicker" data-live-search="true" required>
                                 @foreach (var product in products)
                                 {
                                     <option value="@product.ProductName">@product.ProductName</option>
@@ -39,7 +39,7 @@
                         </div><br />
                         <div class="form-group">
                             <label for="client" class="col-form-label">Клиент:</label>
-                            <select name="clientName" id="client" required>
+                            <select name="clientName" id="client" class="selectpicker" data-live-search="true" required>
                                 @foreach (var client in clients)
                                 {
                                     <option value="@client.Name">@client.Name</option>
@@ -48,7 +48,7 @@
                         </div><br />
                               <div class="form-group">
                                   <label for="manager" class="col-form-label">Менеджер:</label>
-                                  <select name="managerName" id="manager" required>
+                                  <select name="managerName" id="manager" class="selectpicker" data-live-search="true" required>
                                       @foreach (var manager in managers)
                                       {
                                           <option value="@manager.Name">@manager.Name</option>

@@ -14,42 +14,185 @@
         var store = ViewBag.Store;
         var manager = ViewBag.Manager;
         var client = ViewBag.Client;
+        var clients = ViewBag.Clients;
+        var managers = ViewBag.Managers;
+        var products = ViewBag.Products;
+        var queryString = ViewBag.QueryResultString;
         if (store != null)
         {
-            <h3>Все активные аренды магазина @store.Name</h3>
+            <h3>Все завершенные аренды магазина @store.Name</h3><br />
         }
         else if (manager != null)
         {
-            <h3>Все активные аренды менеджера @manager.Name</h3>
+            <h3>Все завершенные аренды менеджера @manager.Name</h3><br />
         }
         else if (client != null)
         {
-            <h3 > Все активные аренды клиента @client.Name</h3>
+            <h3> Все завершенные аренды клиента @client.Name</h3><br />
+        }
+
+        if (clients != null && managers != null && products != null)
+        {
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModel">Фильтр</button>
+            <a href="~/RentStore/GetAllEndedRents?rentStoreId=@store.Id" class="btn btn-primary">Показать все</a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#downloadModel">Cформировать и скачать отчет</button>
+            <div class="modal fade" id="filterModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Фильтр</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="product" class="col-form-label">Продукт:</label>
+                                    <select name="productName" id="product" class="selectpicker" data-live-search="true">
+                                        <option selected value="">Open this select menu</option>
+                                        @foreach (var product in products)
+                                        {
+                                            <option value="@product.ProductName">@product.ProductName</option>
+                                        }
+                                    </select>
+                                </div><br />
+                                <div class="form-group">
+                                    <label for="client" class="col-form-label">Клиент:</label>
+                                    <select name="clientId" id="client" class="selectpicker" data-live-search="true">
+                                        <option selected>Open this select menu</option>
+                                        @foreach (var c in clients)
+                                        {
+                                            <option value="@c.Id">@c.Name</option>
+                                        }
+                                    </select>
+                                </div><br />
+                                <div class="form-group">
+                                    <label for="manager" class="col-form-label">Менеджер:</label>
+                                    <select name="managerId" id="manager" class="selectpicker" data-live-search="true">
+                                        <option selected>Open this select menu</option>
+                                        @foreach (var m in managers)
+                                        {
+                                            <option value="@m.Id">@m.Name</option>
+                                        }
+                                    </select>
+                                </div><br />
+                                <div class="form-group">
+                                    <label for="from" class="col-form-label">От:</label>
+                                    <input type="date" class="form-control" name="from">
+                                </div>
+                                <div class="form-group">
+                                    <label for="to" class="col-form-label">До:</label>
+                                    <input type="date" class="form-control" name="to">
+                                </div>
+
+                                <input type="hidden" name="rentStoreId" value="@store.Id" />
+                                <input type="submit" value="Создать" class="btn btn-primary" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="downloadModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Отчет</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="get">
+                                <div class="form-group">
+                                    <label for="product" class="col-form-label">Продукт:</label>
+                                    <select name="productName" id="product" class="selectpicker" data-live-search="true">
+                                        <option selected value="">Open this select menu</option>
+                                        @foreach (var product in products)
+                                        {
+                                            <option value="@product.ProductName">@product.ProductName</option>
+                                        }
+                                    </select>
+                                </div><br />
+                                <div class="form-group">
+                                    <label for="client" class="col-form-label">Клиент:</label>
+                                    <select name="clientId" id="client" class="selectpicker" data-live-search="true">
+                                        <option selected>Open this select menu</option>
+                                        @foreach (var c in clients)
+                                        {
+                                            <option value="@c.Id">@c.Name</option>
+                                        }
+                                    </select>
+                                </div><br />
+                                <div class="form-group">
+                                    <label for="manager" class="col-form-label">Менеджер:</label>
+                                    <select name="managerId" id="manager" class="selectpicker" data-live-search="true">
+                                        <option selected>Open this select menu</option>
+                                        @foreach (var m in managers)
+                                        {
+                                            <option value="@m.Id">@m.Name</option>
+                                        }
+                                    </select>
+                                </div><br />
+                                <div class="form-group">
+                                    <label for="from" class="col-form-label">От:</label>
+                                    <input type="date" class="form-control" name="from">
+                                </div>
+                                <div class="form-group">
+                                    <label for="to" class="col-form-label">До:</label>
+                                    <input type="date" class="form-control" name="to">
+                                </div>
+
+                                <input type="hidden" name="download" value="true" />
+                                <input type="hidden" name="rentStoreId" value="@store.Id" />
+                                <input type="submit" value="Создать" class="btn btn-primary" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        if (queryString != null)
+        {
+            <br /><br /><span style="white-space: pre-line">@queryString</span><br />
+        }
+        if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td>Id</td>
+                    <td>Продукт</td>
+                    <td>Клиент</td>
+                    <td>Менеджер</td>
+                    <td>Время начала аренды</td>
+                    <td>Время конца</td>
+                    <td>Потраченная сумма</td>
+                </tr>
+                @foreach (var rent in Model)
+                {
+                    <tr>
+                        <td>@rent.Id</td>
+                        <td>@rent.Product.ProductName</td>
+                        <td>@rent.ClientName</td>
+                        <td>@rent.ManagerName</td>
+                        <td>@rent.StartTime</td>
+                        <td>@rent.EndTime</td>
+                        <td>@rent.Check</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>По данному запросу ничего не найдено</p>
         }
     }
+    }
 
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td>Id</td>
-            <td>Продукт</td>
-            <td>Клиент</td>
-            <td>Менеджер</td>
-            <td>Время начала аренды</td>
-            <td>Время конца</td>
-            <td>Потраченная сумма</td>
-        </tr>
-        @foreach (var rent in Model)
-        {
-            <tr>
-                <td>@rent.Id</td>
-                <td>@rent.Product.ProductName</td>
-                <td>@rent.ClientName</td>
-                <td>@rent.ManagerName</td>
-                <td>@rent.StartTime</td>
-                <td>@rent.EndTime</td>
-                <td>@rent.Check</td>
-            </tr>
-        }
-    </table>
+
+
+
+
 </body>
 </html>
